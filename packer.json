@@ -5,7 +5,10 @@
       "guest_os_type": "Ubuntu_64",
       "iso_checksum_type": "md5",
       "iso_checksum": "769474248a3897f4865817446f9a4a53",
-      "iso_url": "http://releases.ubuntu.com/12.04/ubuntu-12.04.5-server-amd64.iso",
+      "iso_urls": [
+        "ubuntu-12.04.5-server-amd64.iso",
+        "http://releases.ubuntu.com/12.04/ubuntu-12.04.5-server-amd64.iso"
+      ],
       "type": "virtualbox-iso",
       "ssh_password": "vagrant",
       "ssh_username": "vagrant",
@@ -49,13 +52,24 @@
       ],
       "type": "shell"
     }
-  ],    
+  ],
   "post-processors": [
-        [{
+        [
+          {
             "type": "vagrant",
             "compression_level": 9,
-            "output": "ubuntu1204x64.box"
-        }
+            "output": "../ubuntu1204x64.box"
+        },
+        {
+            "type": "atlas",
+            "only": ["virtualbox-iso"],
+            "artifact": "gutocarvalho/ubuntu1204x64",
+            "artifact_type": "vagrant.box",
+            "metadata": {
+              "provider": "virtualbox",
+              "version": "0.0.4"
+            }
+          }
         ]
     ]
 }
